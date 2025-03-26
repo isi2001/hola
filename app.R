@@ -155,7 +155,25 @@ chile_regiones <- chile_regiones %>% mutate(color = ifelse(IncDec > 1,"darkblue"
 chile_regiones <- st_transform(chile_regiones, crs = "+proj=longlat +datum=WGS84")
 
 
-addResourcePath("static", "www")
+
+zip_file <- normalizePath("www.zip", mustWork = TRUE)
+extract_dir <- file.path(getwd(), "www")
+
+if (!dir.exists(extract_dir)) {
+  tryCatch({
+    unzip(zip_file, exdir = getwd())
+    message("www.zip extraído exitosamente en: ", extract_dir)
+  }, error = function(e) {
+    stop("Fallo al extraer www.zip: ", e$message)
+  })
+}
+
+if (dir.exists(extract_dir)) {
+  addResourcePath("static", extract_dir)
+} else {
+  stop("La carpeta www no existe después de la extracción")
+}
+
 
 
 
