@@ -12,7 +12,7 @@ tab_poblacion <- function(region)
   summarise(
     "Población 2017" = sum(TOTAL2017), 
     "Población 2025" = sum(`Suma de Poblacion 2025`), 
-    "Crec/Decrec relativo de población 2017 al 2025" = format(
+    "Crec/Decrec relativo de población 2017 al 2025 (%)" = format(
       round((first(`Suma de Poblacion 2025`) - first(TOTAL2017)) / first(TOTAL2017) * 100, 2), 
       big.mark = ".", 
       decimal.mark = ",", 
@@ -50,7 +50,7 @@ tab_poblacion_Metropolitana <- PROYECCIONES_POBmulti %>%
   summarise(
     "Población 2017" = first(TOTAL2017),  
     "Población 2025" = first(`Suma de Poblacion 2025`),  
-    "Crec/Decrec relativo de población 2017 al 2025" = format(
+    "Crec/Decrec relativo de población 2017 al 2025 (%)" = format(
       round((first(`Suma de Poblacion 2025`) - first(TOTAL2017)) / first(TOTAL2017) * 100, 2), 
       big.mark = ".", 
       decimal.mark = ",", 
@@ -92,7 +92,7 @@ tab_poblacion_Biobio <- PROYECCIONES_POBmulti %>%
   summarise(
     "Población 2017" = first(TOTAL2017),  
     "Población 2025" = first(`Suma de Poblacion 2025`),  
-    "Crec/Decrec relativo de población 2017 al 2025" = format(
+    "Crec/Decrec relativo de población 2017 al 2025 (%)" = format(
       round((first(`Suma de Poblacion 2025`) - first(TOTAL2017)) / first(TOTAL2017) * 100, 1), 
       big.mark = ".", 
       decimal.mark = ",", 
