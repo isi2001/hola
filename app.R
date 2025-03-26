@@ -154,8 +154,8 @@ chile_regiones <- chile_regiones %>% mutate(color = ifelse(IncDec > 1,"darkblue"
 
 chile_regiones <- st_transform(chile_regiones, crs = "+proj=longlat +datum=WGS84")
 
-#addResourcePath("static", "www")
-#addResourcePath("static", "www")
+
+addResourcePath("static", "www")
 
 
 
@@ -166,8 +166,8 @@ chile_regiones <- st_transform(chile_regiones, crs = "+proj=longlat +datum=WGS84
 ui <- navbarPage(
   title = div(
     style = "display: flex; align-items: center; gap: 10px; color: #FFFFFF",
-    img(src="mop1.jpeg", style="height: 70px; width: auto;"),
-    h3("Nómina de Respaldo de Ley de Presupuestos MOP 2025", style = "margin: 0; color: #FFFFFF"),
+    img(src="static/mop1.jpeg", style="height: 70px; width: auto;"),
+    h4("Nómina de Respaldo de Ley de Presupuestos MOP 2025", style = "margin: 0; color: #FFFFFF"),
   ),
   
   theme = bs_theme(
@@ -218,7 +218,7 @@ ui <- navbarPage(
   ),
   
   
-  tabPanel(title = tags$span("Información Nacional", style = "font-size: 18px;"),
+  tabPanel(title = tags$span("Información Nacional", style = "font-size: 16px;"),
            fluidPage(
              actionButton("mi_boton", label = "Información importante"),  
              br(), br(),
