@@ -598,7 +598,7 @@ server <- function(input, output, session) {
                                                               ifelse(region_seleccionada() == "MAULE", paste("Estadísticas de la región del Maule"),
                                                                      ifelse(region_seleccionada() == "ÑUBLE", paste("Estadísticas de la región del Ñuble"),
                                                                             ifelse(region_seleccionada() == "BIOBÍO", paste("Estadísticas de la región del Biobío"),
-                                                                                   ifelse(region_seleccionada() == "ARAUCANÍA", paste("Estadísticas de la región de La Araucanía"),
+                                                                                   ifelse(region_seleccionada() == "LA ARAUCANÍA", paste("Estadísticas de la región de La Araucanía"),
                                                                                           ifelse(region_seleccionada() == "LOS RÍOS", paste("Estadísticas de la región de Los Ríos"),
                                                                                                  ifelse(region_seleccionada() == "LOS LAGOS", paste("Estadísticas de la región de Los Lagos"),
                                                                                                         ifelse(region_seleccionada() == "AYSÉN", paste("Estadísticas de la región de Aysén"),
