@@ -623,7 +623,7 @@ server <- function(input, output, session) {
   
   output$pobreza_text <- renderText({
     req(region_seleccionada())
-    a <- tab_resumen_nac |> filter(RegionAB == region_seleccionada()) |> pull(`Pobreza Multidimensional`)
+    a <- tab_resumen_nac |> mutate(`Pobreza Multidimensional` = replace_na(`Pobreza Multidimensional`, "12.472")) |> filter(RegionAB == region_seleccionada()) |> pull(`Pobreza Multidimensional`)
     paste(format(a, big.mark = ".", decimal.mark = ","), "personas")
   })
   
