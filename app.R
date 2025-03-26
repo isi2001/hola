@@ -542,9 +542,9 @@ server <- function(input, output, session) {
     showModal(modalDialog(
       title = "Metodología",
       tags$ul(
-        tags$li("La base de datos consolidada, se obtuvo a partir del cruce de diferentes bases de datos (CUT,PROYECTO DE LEY 2025, PROYECCIÓN DE POBLACIONES, POBLACIÓN CENSAL 2017  y POBREZA MULTIDIMENSIONAL)
+        tags$li("La base de datos consolidada, se obtuvo a partir del cruce de diferentes bases de datos (CUT, PROYECTO DE LEY 2025, PROYECCIÓN DE POBLACIONES, POBLACIÓN CENSAL 2017 y POBREZA MULTIDIMENSIONAL)
             con el fin de normalizarla, se realizó un proceso de transformación de la variable correspondiente a cada servicio MOP, por lo que a cada uno de estos se le asignó la abreviación oficial (ej: Dirección de Planeamiento - DP),
-             existen ervicios que tienen un porcentaje muy pequeño por lo que se recurrió a una agrupación en la categoría 'Otros', para mayor detalle de porcentajes y montos, se debe posar el cursor por sobre la categoría."),
+             existen servicios que tienen un porcentaje muy pequeño por lo que se recurrió a una agrupación en la categoría 'Otros', para mayor detalle de porcentajes y montos, se debe posar el cursor por sobre la categoría."),
         br(),
         tags$li("En la base de datos se encuentra la variable 'Programa dipres', que indica a cuál programa pertenecen los proyectos. Dada la relevancia del eje ministerial de 'Seguridad Hídrica', se exploraron los proyectos nuevos dentro de este eje. Por consiguiente, se filtra la base por proyectos nuevos que pertenezcan al eje de 'Seguridad Hídrica'.
              Se categorizaron las instancias en cuatro categorías: Riego, Gestión, Consumo humano y Estudios y otros.  La primera es 'Consumo Humano' que está \ncompuesta por los programas pertenecientes a: agua potable rural semi-concentrada y agua potable rural concentrada. \nLa segunda es 'Riego' que agrupa: grandes obras de riego, conservación de obras de riego, explotación de obras de riego \ny obras de riego. La categoría 'Estudios y otros' reune los siguientes programas asociados a la Dipres: estudio básico, \nestudio y otros. Finalmente, la categoría 'Gestión' abarca: construcción de redes de medición, planes estratégicos de \nrecursos hídricos y ampliación de redes de medición.")),
