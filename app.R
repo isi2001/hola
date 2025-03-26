@@ -662,6 +662,7 @@ server <- function(input, output, session) {
           TRUE ~ NombreComuna
         )) |> 
         rename(
+          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -688,6 +689,7 @@ server <- function(input, output, session) {
           TRUE ~ NombreComuna
         )) |> 
         rename(
+          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025 (%)`,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -745,6 +747,7 @@ server <- function(input, output, session) {
         )) |> 
         
         rename(
+          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -1083,6 +1086,7 @@ server <- function(input, output, session) {
           TRUE ~ NombreComuna
         )) |> 
         rename(
+          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -1113,6 +1117,7 @@ server <- function(input, output, session) {
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
           `Pobreza multidimensional (**)` = `Pobreza Multidimensional`,
+          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`
         )
     } else {
       tab_resumen <- tab_resumen  |> 
@@ -1167,6 +1172,7 @@ server <- function(input, output, session) {
         )) |> 
         
         rename(
+          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025` ,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -1428,7 +1434,8 @@ server <- function(input, output, session) {
       rename(`Región` = `RegionAB`,
              `Pobreza Multidimensional (**)` = `Pobreza Multidimensional`,
              `Población 2025 (*)` = `Población 2025`,
-             `Inversión` = `Monto2025`
+             `Inversión` = `Monto2025`,
+             `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`
       ) %>%  
       datatable(
         options = list(
