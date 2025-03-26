@@ -490,7 +490,7 @@ ui <- navbarPage(
                                    card(
                                      leafletOutput("mapa_comunal", height = "330px"),
                                      card_footer("Fuente: Departamento de Gestión Presupuestaria y proyecciones poblacionales obtenidas desde el INE. 
-                                                 Nota: Los valores se encuentran en miles de pesos")
+                                                 Nota 1: Los valores 'Por definir' corresponden a comunas que forman parte de proyectos intercomunales pero que no tienen un monto asociado. Nota 2: Los montos de Inversión se encuentran en miles de pesos.")
                                    )
                         ))
              )
@@ -577,7 +577,7 @@ server <- function(input, output, session) {
   
   output$titulo_region <- renderUI({
     if (!is.null(region_seleccionada())) {
-      tags$span(paste(region_seleccionada()), style = "font-size: 20px;") 
+      tags$span(paste(region_seleccionada()), style = "font-size: 15px;") 
     } else {
       tags$span("Seleccione una región en el mapa")
     }
@@ -788,7 +788,7 @@ server <- function(input, output, session) {
           paste(
             "<div style='font-size: 14px; line-height: 1.5;'>",
              Comuna, "<br/>",
-            "<b>Inversión:</b> $", format(`Inversión`, big.mark = ".", decimal.mark = ","), "<br/>",
+            "<b>Inversión:</b> $", ifelse(is.na(Inversión), "Por Definir", format(Inversión, big.mark = ".")), "<br/>",
             "<b>Población 2025:</b> ", format(`Población 2025 (*)`, big.mark = "."),
             "</div>"
           ),
@@ -806,8 +806,9 @@ server <- function(input, output, session) {
         title = NULL,
         position = "bottomright",
         labFormat = labelFormat(
-          big.mark = "."
-        )
+          big.mark = ".",
+        ),
+        na.label = "Por Definir"
       )
     
   })
