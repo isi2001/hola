@@ -302,6 +302,13 @@ ui <- navbarPage(
       font-size: 16px !important; /* Tamaño de letra más pequeño */
       font-weight: bold !important; /* Texto en negrita */
       padding: 8px 12px !important; /* Espaciado interno */
+      }
+
+.info-btn {
+      border: none;
+      background: none;
+      color: #6c757d;
+      size: 3px;
     }
                             
     "))
@@ -345,14 +352,28 @@ ui <- navbarPage(
                             ),
                             
                             card(
-                              card_header("Inversión a nivel nacional"),
+                              card_header(
+                                span("Inversión a nivel nacional"),
+                                actionButton(
+                                  "info_btn", 
+                                  "", 
+                                  icon = icon("info-circle"), 
+                                  class = "info-btn float-end"
+                                )
+                              ),
                               plotlyOutput("grafico_nacional"),
                               style = "width: 100%; height: 450px;",
-                              card_footer("Fuente: Departamento de Gestión Presupuestaria. Nota: La flecha (arriba/abajo) indica el cambio respecto al presupuesto 2024, con el factor de crecimiento o decrecimiento entre paréntesis.")
+                              card_footer("Fuente: Departamento de Gestión Presupuestaria")
                             ),
                             
                             card(
-                              card_header("Inversión por categoría del proyecto (arrastre o nuevo)"),
+                              card_header(span("Inversión por categoría del proyecto (arrastre o nuevo)"),
+                                          actionButton(
+                                            "info_regCatNac", 
+                                            "", 
+                                            icon = icon("info-circle"), 
+                                            class = "info-btn float-end"
+                                          )),
                               plotlyOutput("GrafRegCat"),
                               style = "width: 100%; height: 450px;",
                               card_footer("Fuente: Departamento de Gestión Presupuestaria. Nota: Los montos de inversión se encuentran en miles de pesos.")
@@ -380,7 +401,8 @@ ui <- navbarPage(
                             ),
                             
                             card(
-                              card_header("Inversión por eje ministerial y por categoría del proyecto"),
+                              card_header(span("Inversión por eje ministerial y por categoría del proyecto"), actionButton("ejeCatNac", "",icon = icon("info-circle"), 
+                                                                                                                           class = "info-btn float-end")),
                               plotlyOutput("grafico_eje_nac", height = "100%", width = "100%"),
                               style = "width: 100%; height: 500px; overflow: hidden;",
                               card_footer("Fuente: Departamento de Gestión Presupuestaria. Nota: Los montos de inversión se encuentran en miles de pesos.")
@@ -609,6 +631,48 @@ server <- function(input, output, session) {
   })
   
   
+  observeEvent(input$info_btn, {
+    showModal(modalDialog(
+      title = "",
+      
+      tags$li(paste("El promedio de la inversión regional es de", format(mean(tab1$`Monto 2025`), big.mark = ".", decimal.mark = ",")), "($MILES)"),
+      tags$li("La región de Los Lagos presenta el mayor monto de inversión (403.446.777 $MILES) y un aumento de 2,44 veces con respecto a la inversión del año 2024."), 
+      tags$li("La región de Arica y Parinacota tiene el menor monto de inversión (110.889.854 $MILES) y disminuye su inversión -con respecto a 2024- en 0,53 veces.")
+      ,
+      easyClose = TRUE,
+      footer = modalButton("Cerrar")
+    ))
+  })
+  
+  
+  
+  observeEvent(input$info_regCatNac, {
+    showModal(modalDialog(
+      title = "",
+      
+      tags$li(paste("El promedio de la inversión regional en proyectos de arrastre es de", format(mean(tabREG_CAT$TotalCat[tabREG_CAT$Categoría == "Arrastre"]), big.mark = ".", decimal.mark = ",")), "($MILES)", "mientras que el promedio de inversión para los proyectos nuevos es de", format(mean(tabREG_CAT$TotalCat[tabREG_CAT$Categoría == "Nuevo"]), big.mark = ".", decimal.mark = ","), "($MILES)"),
+      tags$li("La región con mayor inversión en proyectos de arrastre es Los Lagos, con 358.565.751 ($MILES), seguida por la Región Metropolitana con 301.579.374 ($MILES) y La Araucanía con 258.061.184 ($MILES)."), 
+      tags$li("En términos generales, la inversión en todas las regiones -incluyendo los proyectos interregionales- está mayormente concentrada en la continuidad de proyectos previamente comenzados."),
+      easyClose = TRUE,
+      footer = modalButton("Cerrar")
+    ))
+  })
+  
+  
+  
+  observeEvent(input$ejeCatNac, {
+    showModal(modalDialog(
+      title = "",
+      
+      tags$li("El eje de 'Integración territorial, conectividad y movilidad' tiene el mayor porcentaje de inversión tanto en los proyectos de arrastre (65,61%) como los nuevos (10,74%), por lo que su representación en términos de inversión a nivel nacional, representa el 76,35%."),
+      tags$li("'Desarrollo Productivo, Social, Cultural y Científico' es el eje que acumula un menor porcentaje a nivel nacional, tanto en los proyectos de arrastre como en los nuevos."), 
+      tags$li("El eje de 'Seguridad Hídrica' es el segundo eje con mayor porcentaje de inversión a nivel nacional, sin embargo, con un porcentaje muy menor (12,37%) en comparación al eje de 'Integración territorial, conectividad y movilidad.'"),
+      easyClose = TRUE,
+      footer = modalButton("Cerrar")
+    ))
+  })
+  
+  
   output$inversion_text <- renderText({
     req(region_seleccionada())
     a <- tab1 |> filter(RegionAB == region_seleccionada()) |> pull(`Monto 2025`)
@@ -806,7 +870,7 @@ server <- function(input, output, session) {
         pal = pal, 
         values = ~Inversión, 
         opacity = 0.7, 
-        title = NULL,
+        title = "Inversión",
         position = "bottomright",
         labFormat = labelFormat(
           big.mark = ".",
@@ -1521,4 +1585,3 @@ server <- function(input, output, session) {
 
 
 shinyApp(ui = ui, server = server)
-
