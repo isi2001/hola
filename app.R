@@ -328,9 +328,9 @@ ui <- navbarPage(
                               height = "100px"
                             ),
                             value_box(
-                              title = "Proyección Población 2025",
-                              "20.206.953 habitantes",
-                              tags$small("Fuente: Proyección de población, INE", style="font-size: 0.7rem;"),
+                              title = "Población Censal 2024",
+                              "18.480.432 habitantes",
+                              tags$small("Fuente: Resultados Censo 2024, INE", style="font-size: 0.7rem;"),
                               theme = "primary",
                               width = "100%",
                               height = "100px"
@@ -347,7 +347,7 @@ ui <- navbarPage(
                             
                             
                             card(
-                              card_header("Seleccione una región en el mapa y luego presione la pestaña 'Región seleccionada' para mayor información"),
+                              card_header("Seleccione una región en el mapa y luego presione la pestaña superior llamada '📌 Región seleccionada' para mayor información"),
                               leafletOutput("mapa", height = "330px")
                             ),
                             
@@ -397,7 +397,7 @@ ui <- navbarPage(
                               card_header("Inversión en nuevos proyectos pertenecientes al eje de Seguridad Hídrica"),
                               plotlyOutput("SHNAC"),
                               style = "width: 100%; height: 450px;",
-                              card_footer("Fuente: Departamento de Gestión Presupuestaria. Nota 1: La categorización fue realizada en función de la variable 'Programa Dipres'. 'Consumo Humano' está compuesta por: agua potable rural semi-concentrada y agua potable rural concentrada.'Riego' agrupa: grandes obras de riego, conservación de obras de riego, explotación de obras de riego y obras de riego. La categoría 'Estudios y otros' reune: estudio básico, \nestudio y otros. Finalmente, 'Gestión' abarca: construcción de redes de medición, planes estratégicos de recursos hídricos y ampliación de redes de medición. Nota 2: Los montos de inversión se encuentran en miles de pesos.")
+                              card_footer("Fuente: Departamento de Gestión Presupuestaria. Nota 1: La categorización fue realizada en función de la variable 'Programa Dipres'. 'Consumo Humano' está compuesta por: agua potable rural semi-concentrado, agua potable rural concentrado y agua potable rural disperso .'Riego' agrupa: grandes obras de riego, conservación de obras de riego, explotación de obras de riego y obras de riego. La categoría 'Estudios y otros' reune: estudio básico, \nestudio y otros. Finalmente, 'Gestión' abarca: construcción de redes de medición, planes estratégicos de recursos hídricos y ampliación de redes de medición. Nota 2: Los montos de inversión se encuentran en miles de pesos.")
                             ),
                             
                             card(
@@ -489,7 +489,7 @@ ui <- navbarPage(
                             card_header("Inversión 2025 en nuevos proyectos pertenecientes al eje de Seguridad Hídrica"),
                             plotlyOutput("grafico_aguas"),
                             style = "width: 100%; height: 460px;",
-                            card_footer("Fuente: Departamento de Gestión Presupuestaria. Nota 1: La categorización fue realizada en función de la variable 'Programa Dipres'. 'Consumo Humano' está compuesta por: agua potable rural semi-concentrada y agua potable rural concentrada.'Riego' agrupa: grandes obras de riego, conservación de obras de riego, explotación de obras de riego y obras de riego. La categoría 'Estudios y otros' reune: estudio básico, estudio y otros. Finalmente, 'Gestión' abarca: construcción de redes de medición, planes estratégicos de recursos hídricos y ampliación de redes de medición. Nota 2: Los montos de inversión se encuentran en miles de pesos.")
+                            card_footer("Fuente: Departamento de Gestión Presupuestaria. Nota 1: La categorización fue realizada en función de la variable 'Programa Dipres'. 'Consumo Humano' está compuesta por: agua potable rural semi-concentrado, agua potable rural concentrado y agua potable rural disperso.'Riego' agrupa: grandes obras de riego, conservación de obras de riego, explotación de obras de riego y obras de riego. La categoría 'Estudios y otros' reune: estudio básico, estudio y otros. Finalmente, 'Gestión' abarca: construcción de redes de medición, planes estratégicos de recursos hídricos y ampliación de redes de medición. Nota 2: Los montos de inversión se encuentran en miles de pesos.")
                           )
                         )
                ),
@@ -564,7 +564,7 @@ server <- function(input, output, session) {
     showModal(modalDialog(
       title = "Metodología",
       tags$ul(
-        tags$li("La base de datos consolidada, se obtuvo a partir del cruce de diferentes bases de datos (CUT, PROYECTO DE LEY 2025, PROYECCIÓN DE POBLACIONES, POBLACIÓN CENSAL 2017 y POBREZA MULTIDIMENSIONAL)
+        tags$li("La base de datos consolidada, se obtuvo a partir del cruce de diferentes bases de datos (CUT, PROYECTO DE LEY 2025, PROYECCIÓN DE POBLACIONES, POBLACIÓN CENSAL 2024 y POBREZA MULTIDIMENSIONAL)
             con el fin de normalizarla, se realizó un proceso de transformación de la variable correspondiente a cada servicio MOP, por lo que a cada uno de estos se le asignó la abreviación oficial (ej: Dirección de Planeamiento - DP),
              existen servicios que tienen un porcentaje muy pequeño por lo que se recurrió a una agrupación en la categoría 'Otros', para mayor detalle de porcentajes y montos, se debe posar el cursor por sobre la categoría."),
         br(),
@@ -579,7 +579,7 @@ server <- function(input, output, session) {
         br(),
         tags$li("3. Estimación de pobreza, casen 2022. Recuperado a partir de: https://observatorio.ministeriodesarrollosocial.gob.cl/pobreza-comunal-2022"),
         br(),
-        tags$li("4. Censo 2017, INE. Recuperado a partir de: https://www.ine.gob.cl/estadisticas/sociales/censos-de-poblacion-y-vivienda/censo-de-poblacion-y-vivienda"),
+        tags$li("4. Censo 2024, INE. Recuperado a partir de: https://censo2024.ine.gob.cl/estadisticas/"),
         br(),
         tags$li("5. Departamento de Gestión Presupuestaria")
       ),
@@ -707,7 +707,7 @@ server <- function(input, output, session) {
     if (region_seleccionada() == "METROPOLITANA") {
       tab_resumen <- tab_resumen_RM %>%
         mutate(
-          `Población 2017` = scales::comma(`Población 2017`, big.mark = ".", decimal.mark = ","),
+          `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
           `Población 2025` = scales::comma(`Población 2025`, big.mark = ".", decimal.mark = ","),
           Monto2025 = as.numeric(Monto2025)
         ) |> 
@@ -725,8 +725,8 @@ server <- function(input, output, session) {
           NombreComuna == "SAN RAMON" ~ "SAN RAMÓN",
           TRUE ~ NombreComuna
         )) |> 
-        rename(
-          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`,
+        dplyr::rename(
+          `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025`,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -736,7 +736,7 @@ server <- function(input, output, session) {
       tab_resumen <- tab_resumen_BIOBIO  |> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
-          `Población 2017` = scales::comma(`Población 2017`, big.mark = ".", decimal.mark = ","),
+          `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
           `Población 2025` = scales::comma(`Población 2025`, big.mark = ".", decimal.mark = ","),
           Monto2025 = as.numeric(Monto2025)
         ) |> 
@@ -752,8 +752,8 @@ server <- function(input, output, session) {
           NombreComuna == "TOME" ~ "TOMÉ",
           TRUE ~ NombreComuna
         )) |> 
-        rename(
-          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025 (%)`,
+        dplyr::rename(
+          `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025 (%)`,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -763,7 +763,7 @@ server <- function(input, output, session) {
       tab_resumen <- tab_resumen  |> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
-          `Población 2017` = scales::comma(`Población 2017`, big.mark = ".", decimal.mark = ","),
+          `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
           `Población 2025` = scales::comma(`Población 2025`, big.mark = ".", decimal.mark = ","),
           Monto2025 = as.numeric(Monto2025))  |> 
         mutate(NombreComuna = case_when(NombreComuna == "MARIA ELENA" ~ "MARÍA ELENA", NombreComuna == "OLLAGUE" ~ "OLLAGÜE",
@@ -810,8 +810,8 @@ server <- function(input, output, session) {
                                         NombreComuna == "RIO VERDE" ~ "RÍO VERDE", TRUE ~ NombreComuna
         )) |> 
         
-        rename(
-          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`,
+        dplyr::rename(
+          `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025`,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -1131,7 +1131,7 @@ server <- function(input, output, session) {
     if (region_seleccionada() == "METROPOLITANA") {
       tab_resumen <- tab_resumen_RM %>%
         mutate(
-          `Población 2017` = scales::comma(`Población 2017`, big.mark = ".", decimal.mark = ","),
+          `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
           `Población 2025` = scales::comma(`Población 2025`, big.mark = ".", decimal.mark = ","),
           Monto2025 = ifelse(is.na(Monto2025), "Por definir", scales::comma(Monto2025, big.mark = ".", decimal.mark = ","))
         ) |> 
@@ -1149,8 +1149,8 @@ server <- function(input, output, session) {
           NombreComuna == "SAN RAMON" ~ "SAN RAMÓN",
           TRUE ~ NombreComuna
         )) |> 
-        rename(
-          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`,
+        dplyr::rename(
+          `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025`,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -1160,7 +1160,7 @@ server <- function(input, output, session) {
       tab_resumen <- tab_resumen_BIOBIO  |> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
-          `Población 2017` = scales::comma(`Población 2017`, big.mark = ".", decimal.mark = ","),
+          `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
           `Población 2025` = scales::comma(`Población 2025`, big.mark = ".", decimal.mark = ","),
           Monto2025 = ifelse(is.na(Monto2025), "Por definir", scales::comma(Monto2025, big.mark = ".", decimal.mark = ","))
         ) |> 
@@ -1176,18 +1176,19 @@ server <- function(input, output, session) {
           NombreComuna == "TOME" ~ "TOMÉ",
           TRUE ~ NombreComuna
         )) |> 
-        rename(
-          `Inversión` = `Monto2025`,
+        dplyr::rename(
+          Inversión = Monto2025,
           `Población 2025 (*)` = `Población 2025`,
-          `Comuna` = `NombreComuna`,
+          Comuna = NombreComuna,
           `Pobreza multidimensional (**)` = `Pobreza Multidimensional`,
-          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`
+          `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025`
         )
+      
     } else {
       tab_resumen <- tab_resumen  |> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
-          `Población 2017` = scales::comma(`Población 2017`, big.mark = ".", decimal.mark = ","),
+          `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
           `Población 2025` = scales::comma(`Población 2025`, big.mark = ".", decimal.mark = ","),
           Monto2025 = ifelse(is.na(Monto2025), "Por definir", scales::comma(Monto2025, big.mark = ".", decimal.mark = ","))
         )  |> 
@@ -1235,8 +1236,8 @@ server <- function(input, output, session) {
                                         NombreComuna == "RIO VERDE" ~ "RÍO VERDE", TRUE ~ NombreComuna
         )) |> 
         
-        rename(
-          `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025` ,
+        dplyr::rename(
+          `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025` ,
           `Inversión` = `Monto2025`,
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
@@ -1490,16 +1491,16 @@ server <- function(input, output, session) {
   output$tabla_nacional <- renderDT({
     tab_resumen_nac %>%
       mutate(
-        `Población 2017` = scales::comma(as.numeric(`Población 2017`), big.mark = ".", decimal.mark = ","),
+        `Población 2024` = scales::comma(as.numeric(`Población 2024`), big.mark = ".", decimal.mark = ","),
         `Población 2025` = scales::comma(as.numeric(`Población 2025`), big.mark = ".", decimal.mark = ","),
         Monto2025 = scales::comma(as.numeric(Monto2025), big.mark = ".", decimal.mark = ","),
         `Pobreza Multidimensional` = replace_na(`Pobreza Multidimensional`, "12.472")
       ) %>%
-      rename(`Región` = `RegionAB`,
+      dplyr::rename(`Región` = `RegionAB`,
              `Pobreza Multidimensional (**)` = `Pobreza Multidimensional`,
              `Población 2025 (*)` = `Población 2025`,
              `Inversión` = `Monto2025`,
-             `Crec/Decrec relativo de población 2017 al 2025 (%)` = `Crec/Decrec relativo de población 2017 al 2025`
+             `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025`
       ) %>%  
       datatable(
         options = list(
