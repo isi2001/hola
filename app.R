@@ -320,8 +320,8 @@ ui <- navbarPage(
                             col_widths = c(4, 4, 4), 
                             
                             value_box(
-                              title = "Total inversión 2025 ($MILES)",
-                              value = p("3.829.909.407"),
+                              title = "Total inversión 2025 ",
+                              value = p("3.829.909.407 ($MILES)"),
                               tags$small("Fuente: Departamento de Gestión Presupuestaria", style="font-size: 0.7rem;"),
                               theme = "primary",
                               width = "100%",
