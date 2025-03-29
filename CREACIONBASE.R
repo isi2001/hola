@@ -154,6 +154,7 @@ BASE <- BASE %>%  mutate(AGUA_DIPRES = case_when(`Programa dipres` == "GRANDES O
                                                  `Programa dipres` ==  "OBRAS MEDIANAS DE RIEGO" ~ "RIEGO",
                                                  `Programa dipres` ==  "EXPLOTACION DE OBRAS DE RIEGO" ~ "RIEGO",
                                                  `Programa dipres` ==  "OBRAS DE RIEGO" ~ "RIEGO",
+                                                 `Programa dipres` == "AGUA POTABLE RURAL DISPERSO" ~ "CONSUMO HUMANO",
                                                  `Programa dipres` == "AGUA POTABLE RURAL SEMI CONCENTRADO" ~ "CONSUMO HUMANO",
                                                  `Programa dipres` == "AGUA POTABLE RURAL CONCENTRADO" ~ "CONSUMO HUMANO",
                                                  `Programa dipres` == "ESTUDIO BÁSICO" ~ "ESTUDIOS Y OTROS",
@@ -188,10 +189,10 @@ colnames(PL2024)[1] <- "RegionAB"
 tab_poblacion_nac <- PROYECCIONES_POBmulti %>%
   group_by(RegionAB) %>%
   summarise(
-    "Población 2017" = sum(TOTAL2017), 
+    "Población 2024" = sum(`Población censada`), 
     "Población 2025" = sum(`Suma de Poblacion 2025`), 
-    "Crec/Decrec relativo de población 2017 al 2025" = format(
-      round((first(`Suma de Poblacion 2025`) - first(TOTAL2017)) / first(TOTAL2017) * 100, 2), 
+    "Crec/Decrec relativo de población 2024 al 2025" = format(
+      round((first(`Suma de Poblacion 2025`) - first(`Población censada`)) / first(`Población censada`) * 100, 2), 
       big.mark = ".", 
       decimal.mark = ",", 
       nsmall = 2
