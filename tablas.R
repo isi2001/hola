@@ -7,13 +7,13 @@ PROYECCIONES_POBmulti <- PROYECCIONES_POBmulti %>% mutate(NombreComuna = case_wh
 tab_poblacion <- function(region)
   {PROYECCIONES_POBmulti %>%
   filter(RegionAB == region) %>% 
-  select(NombreComuna, TOTAL2017, `Suma de Poblacion 2025`, `Número de personas en situación de pobreza multidimensional (**)`, Código) %>%
+  select(NombreComuna, `Población censada`, `Suma de Poblacion 2025`, `Número de personas en situación de pobreza multidimensional (**)`, Código) %>%
   group_by(NombreComuna) %>%
   summarise(
-    "Población 2017" = sum(TOTAL2017), 
+    "Población 2024" = sum(`Población censada`), 
     "Población 2025" = sum(`Suma de Poblacion 2025`), 
-    "Crec/Decrec relativo de población 2017 al 2025" = format(
-      round((first(`Suma de Poblacion 2025`) - first(TOTAL2017)) / first(TOTAL2017) * 100, 2), 
+    "Crec/Decrec relativo de población 2024 al 2025" = format(
+      round((first(`Suma de Poblacion 2025`) - first(`Población censada`)) / first(`Población censada`) * 100, 2), 
       big.mark = ".", 
       decimal.mark = ",", 
       nsmall = 2
@@ -45,13 +45,13 @@ tab_monto <- function(region){
 
 tab_poblacion_Metropolitana <- PROYECCIONES_POBmulti %>%
   filter(RegionAB=="METROPOLITANA") %>%  
-  select(NombreComuna, TOTAL2017, `Suma de Poblacion 2025`, `Número de personas en situación de pobreza multidimensional (**)`, Código) %>%
+  select(NombreComuna, `Población censada`, `Suma de Poblacion 2025`, `Número de personas en situación de pobreza multidimensional (**)`, Código) %>%
   group_by(NombreComuna) %>%
   summarise(
-    "Población 2017" = first(TOTAL2017),  
+    "Población 2024" = first(`Población censada`),  
     "Población 2025" = first(`Suma de Poblacion 2025`),  
-    "Crec/Decrec relativo de población 2017 al 2025" = format(
-      round((first(`Suma de Poblacion 2025`) - first(TOTAL2017)) / first(TOTAL2017) * 100, 2), 
+    "Crec/Decrec relativo de población 2024 al 2025" = format(
+      round((first(`Suma de Poblacion 2025`) - first(`Población censada`)) / first(`Población censada`) * 100, 2), 
       big.mark = ".", 
       decimal.mark = ",", 
       nsmall = 1
@@ -87,13 +87,13 @@ tab_resumen_RM <- tab_resumen_RM %>%
 
 tab_poblacion_Biobio <- PROYECCIONES_POBmulti %>%
   filter(RegionAB == "BIOBÍO") %>%  
-  select(NombreComuna, TOTAL2017, `Suma de Poblacion 2025`, `Número de personas en situación de pobreza multidimensional (**)`, Código) %>%
+  select(NombreComuna, `Población censada`, `Suma de Poblacion 2025`, `Número de personas en situación de pobreza multidimensional (**)`, Código) %>%
   group_by(NombreComuna) %>%
   summarise(
-    "Población 2017" = first(TOTAL2017),  
+    "Población 2024" = first(`Población censada`),  
     "Población 2025" = first(`Suma de Poblacion 2025`),  
-    "Crec/Decrec relativo de población 2017 al 2025" = format(
-      round((first(`Suma de Poblacion 2025`) - first(TOTAL2017)) / first(TOTAL2017) * 100, 1), 
+    "Crec/Decrec relativo de población 2024 al 2025" = format(
+      round((first(`Suma de Poblacion 2025`) - first(`Población censada`)) / first(`Población censada`) * 100, 1), 
       big.mark = ".", 
       decimal.mark = ",", 
       nsmall = 1
