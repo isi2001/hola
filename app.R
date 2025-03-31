@@ -524,8 +524,6 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
   
-  region_seleccionada <- reactiveVal(NULL)
-  
   shinyalert(
     title = "Nómina de Respaldo de Ley de Presupuestos MOP 2025",
     text = "Unidad de Gestión del Conocimiento y Tecnología",
@@ -536,6 +534,9 @@ server <- function(input, output, session) {
     confirmButtonText = "Cerrar",
     imageUrl = "static/mop1.jpeg"
   )
+  region_seleccionada <- reactiveVal(NULL)
+  
+
  
   output$mapa <- renderLeaflet({
     leaflet(chile_regiones) %>%
