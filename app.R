@@ -531,7 +531,8 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
  
-  shinyalert("Welcome", "Welcome to the ___ Dashboard!", type = "info")
+  shinyalert("Nómina de Respaldo de Ley de Presupuestos MOP 2025", "Unidad de Gestión del Conocimiento y tecnología",
+             imageUrl = "static/mop1.jpeg")
   
   region_seleccionada <- reactiveVal(NULL)
   
