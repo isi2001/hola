@@ -527,16 +527,6 @@ server <- function(input, output, session) {
   
   region_seleccionada <- reactiveVal(NULL)
   
-  shinyalert(
-    title = "Nómina de Respaldo de Ley de Presupuestos MOP 2025",
-    text = "Unidad de Gestión del Conocimiento y Tecnología",
-    type = "info",
-    closeOnEsc = FALSE,
-    closeOnClickOutside = FALSE,
-    showConfirmButton = TRUE,
-    confirmButtonText = "Cerrar"
-  )
- 
   output$mapa <- renderLeaflet({
     leaflet(chile_regiones) %>%
       addProviderTiles("CartoDB.Positron") %>% 
@@ -1605,3 +1595,4 @@ server <- function(input, output, session) {
 
 
 shinyApp(ui = ui, server = server)
+
