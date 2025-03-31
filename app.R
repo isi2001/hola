@@ -528,8 +528,8 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
 
-  shinyalert("Nómina de Respaldo de Ley de Presupuestos MOP 2025", "Unidad de Gestión del Conocimiento y tecnología",
-             imageUrl = "static/mop1.jpeg")
+  shinyalert("Nómina de Respaldo<br>Ley de Presupuestos<br> 2025", "Unidad de Gestión del Conocimiento y tecnología",
+             imageUrl = "static/mop1.jpeg", html = TRUE)
   
   
   region_seleccionada <- reactiveVal(NULL)
