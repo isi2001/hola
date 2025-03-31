@@ -184,7 +184,7 @@ if (dir.exists(extract_dir)) {
 ui <- navbarPage(
 
 
-  
+  useShinyalert(),
   
   title = div(
     style = "display: flex; align-items: center; gap: 10px; color: #FFFFFF",
@@ -514,7 +514,7 @@ ui <- navbarPage(
                                    col_widths = 12,  
                                    card(
                                      leafletOutput("mapa_comunal", height = "330px"),
-                                     card_footer("Fuente: Departamento de Gestión Presupuestaria y proyecciones poblacionales obtenidas desde el INE. 
+                                     card_footer("Fuente: Departamento de Gestión Presupuestaria y proyecciones poblacionales 2025 (*) obtenidas desde el INE. 
                                                  Nota 1: Los valores 'Por definir' corresponden a comunas que forman parte de proyectos intercomunales pero que no tienen un monto asociado. Nota 2: Los montos de Inversión se encuentran en miles de pesos.")
                                    )
                         ))
@@ -528,6 +528,9 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
 
+  shinyalert("Nómina de Respaldo de Ley de Presupuestos MOP 2025", "Unidad de Gestión del Conocimiento y tecnología",
+             imageUrl = "static/mop1.jpeg")
+  
   
   region_seleccionada <- reactiveVal(NULL)
   
@@ -709,6 +712,9 @@ server <- function(input, output, session) {
     
     if (region_seleccionada() == "METROPOLITANA") {
       tab_resumen <- tab_resumen_RM %>%
+        mutate(Monto2025 = case_when(NombreComuna == "CALERA DE TANGO" ~ 0,
+                                     NombreComuna == "PIRQUE" ~ 0,
+                                     TRUE ~ Monto2025)) |> 
         mutate(
           `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
           `Población 2025` = scales::comma(`Población 2025`, big.mark = ".", decimal.mark = ","),
@@ -737,6 +743,8 @@ server <- function(input, output, session) {
         )
     } else if (region_seleccionada() == "BIOBÍO") {
       tab_resumen <- tab_resumen_BIOBIO  |> 
+        mutate(Monto2025 = case_when(NombreComuna  == "SAN ROSENDO" ~ 0,
+                                     TRUE ~ Monto2025)) |> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
           `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
@@ -859,7 +867,7 @@ server <- function(input, output, session) {
             "<div style='font-size: 14px; line-height: 1.5;'>",
              Comuna, "<br/>",
             "<b>Inversión:</b> $", ifelse(is.na(Inversión), "Por Definir", format(Inversión, big.mark = ".")), "<br/>",
-            "<b>Población 2025:</b> ", format(`Población 2025 (*)`, big.mark = "."),
+            "<b>Población 2025 (*):</b> ", format(`Población 2025 (*)`, big.mark = "."),
             "</div>"
           ),
           htmltools::HTML
