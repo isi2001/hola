@@ -182,6 +182,7 @@ if (dir.exists(extract_dir)) {
 
 
 ui <- navbarPage(
+  
   title = div(
     style = "display: flex; align-items: center; gap: 10px; color: #FFFFFF",
     img(src="static/mop1.jpeg", style="height: 70px; width: auto;"),
@@ -524,11 +525,7 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
   
-  shinyalert(
-    title = "Bienvenido",
-    text = "Contenido de tu mensaje aquí",
-    type = "info"
-  )
+  shinyalert("Welcome", "Welcome to the ___ Dashboard!", type = "info")
   
   region_seleccionada <- reactiveVal(NULL)
   
