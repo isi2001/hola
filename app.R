@@ -1,7 +1,6 @@
 source("packages.R")
 source("CREACIONBASE.R")
 source("tablas.R")
-library(shinyalert)
 
 
 
@@ -183,7 +182,6 @@ if (dir.exists(extract_dir)) {
 
 
 ui <- navbarPage(
-  useShinyalert(), 
   title = div(
     style = "display: flex; align-items: center; gap: 10px; color: #FFFFFF",
     img(src="static/mop1.jpeg", style="height: 70px; width: auto;"),
@@ -527,30 +525,10 @@ ui <- navbarPage(
 server <- function(input, output, session) {
   
   shinyalert(
-    title = "¡Bienvenido/a al Dashboard MOP 2025!",
-    text = HTML("
-      <div style='text-align: left;'>
-        <p>Este dashboard muestra la nómina de respaldo de la <strong>Ley de Presupuestos del MOP para 2025</strong>.</p>
-        <p><strong>Instrucciones:</strong></p>
-        <ul>
-          <li>Use las pestañas superiores para navegar entre la vista nacional y regional.</li>
-          <li>Los datos de inversión están en <strong>miles de pesos</strong>.</li>
-          <li>Haga clic en gráficos para detalles interactivos.</li>
-        </ul>
-        <hr>
-        <img src='static/mop1.jpeg' width='150px' style='display: block; margin: 10px auto;'>
-      </div>
-    "),
-    type = "info",
-    html = TRUE,  # Permite HTML en el texto
-    closeOnEsc = FALSE,
-    closeOnClickOutside = FALSE,
-    showConfirmButton = TRUE,
-    confirmButtonText = "Entendido",
-    confirmButtonCol = "#003366",  # Color del botón (azul MOP)
-    animation = "pop"
+    title = "Bienvenido",
+    text = "Contenido de tu mensaje aquí",
+    type = "info"
   )
-  
   
   region_seleccionada <- reactiveVal(NULL)
   
