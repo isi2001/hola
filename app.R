@@ -1156,7 +1156,10 @@ server <- function(input, output, session) {
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
           `Pobreza multidimensional (**)` = `Pobreza Multidimensional`,
-        )
+        ) |> 
+        mutate(Inversión = case_when(NombreComuna == "CALERA DE TANGO" ~ 0,
+                                     NombreComuna == "PIRQUE" ~ 0,
+                                     TRUE ~ Inversión))
     } else if (region_seleccionada() == "BIOBÍO") {
       tab_resumen <- tab_resumen_BIOBIO  |> 
         select(-c(`Código`))|> 
@@ -1184,7 +1187,9 @@ server <- function(input, output, session) {
           Comuna = NombreComuna,
           `Pobreza multidimensional (**)` = `Pobreza Multidimensional`,
           `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025`
-        )
+        ) |> 
+        mutate(Inversión = case_when(NombreComuna  == "SAN ROSENDO" ~ 0,
+                                     TRUE ~ Inversión))
       
     } else {
       tab_resumen <- tab_resumen  |> 
@@ -1247,7 +1252,7 @@ server <- function(input, output, session) {
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
           `Pobreza multidimensional (**)` = `Pobreza Multidimensional`,
-        )
+        ) 
     }
     
     tab_resumen  |>   

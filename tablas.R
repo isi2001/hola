@@ -35,7 +35,8 @@ tab_monto <- function(region){
   filter(RegionAB == region) %>% 
   select(NombreComuna, `Monto 2025`) %>%
   group_by(NombreComuna) %>%
-  summarise("Monto2025" = sum(`Monto 2025`))
+  summarise("Monto2025" = sum(`Monto 2025`)) |> 
+    mutate(NombreComuna = case_when(NombreComuna == "COIHAIQUE" ~ "COYHAIQUE", TRUE ~ NombreComuna) )
 }
 
 
