@@ -1,7 +1,7 @@
 source("packages.R")
 source("CREACIONBASE.R")
 source("tablas.R")
-library(shinyalert)
+
 
 
 

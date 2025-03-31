@@ -2854,6 +2854,32 @@
         "Built": "R 4.4.2; ; 2025-02-16 03:25:36 UTC; windows"
       }
     },
+    "shinyalert": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "description": {
+        "Package": "shinyalert",
+        "Title": "Easily Create Pretty Popup Messages (Modals) in 'Shiny'",
+        "Version": "3.1.0",
+        "Authors@R": "c(\n    person(\"Dean\", \"Attali\",\n        email = \"daattali@gmail.com\",\n        role = c(\"aut\", \"cre\"),\n        comment = c(ORCID=\"0000-0002-5645-3493\", \"R interface\")),\n    person(\"Tristan\", \"Edwards\", role = c(\"aut\"),\n        comment = \"sweetalert library\"),\n    person(\"Zhengjia\", \"Wang\", role = c(\"ctb\"))\n    )",
+        "Description": "Easily create pretty popup messages (modals) in 'Shiny'. A modal can\n    contain text, images, OK/Cancel buttons, an input to get a response from the\n    user, and many more customizable options.",
+        "URL": "https://github.com/daattali/shinyalert,\nhttps://daattali.com/shiny/shinyalert-demo/",
+        "BugReports": "https://github.com/daattali/shinyalert/issues",
+        "Depends": "R (>= 3.0.2)",
+        "Imports": "htmltools (>= 0.3.5), shiny (>= 1.0.4), uuid",
+        "Suggests": "colourpicker, shinydisconnect",
+        "License": "MIT + file LICENSE",
+        "Encoding": "UTF-8",
+        "RoxygenNote": "7.2.3",
+        "NeedsCompilation": "no",
+        "Packaged": "2024-04-26 16:57:44 UTC; Dean",
+        "Author": "Dean Attali [aut, cre] (<https://orcid.org/0000-0002-5645-3493>, R\n    interface),\n  Tristan Edwards [aut] (sweetalert library),\n  Zhengjia Wang [ctb]",
+        "Maintainer": "Dean Attali <daattali@gmail.com>",
+        "Repository": "CRAN",
+        "Date/Publication": "2024-04-27 23:10:02 UTC",
+        "Built": "R 4.4.3; ; 2025-03-28 03:17:24 UTC; windows"
+      }
+    },
     "shinydashboard": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -3375,6 +3401,29 @@
         "Archs": "x64"
       }
     },
+    "uuid": {
+      "Source": "CRAN",
+      "Repository": "https://cran.rstudio.com",
+      "description": {
+        "Package": "uuid",
+        "Version": "1.2-1",
+        "Title": "Tools for Generating and Handling of UUIDs",
+        "Author": "Simon Urbanek [aut, cre, cph] (https://urbanek.org,\n    <https://orcid.org/0000-0003-2297-1732>),\n  Theodore Ts'o [aut, cph] (libuuid)",
+        "Maintainer": "Simon Urbanek <Simon.Urbanek@r-project.org>",
+        "Authors@R": "c(person(\"Simon\", \"Urbanek\", role=c(\"aut\",\"cre\",\"cph\"), email=\"Simon.Urbanek@r-project.org\", comment=c(\"https://urbanek.org\", ORCID=\"0000-0003-2297-1732\")), person(\"Theodore\",\"Ts'o\", email=\"tytso@thunk.org\", role=c(\"aut\",\"cph\"), comment=\"libuuid\"))",
+        "Depends": "R (>= 2.9.0)",
+        "Description": "Tools for generating and handling of UUIDs (Universally Unique Identifiers).",
+        "License": "MIT + file LICENSE",
+        "URL": "https://www.rforge.net/uuid",
+        "BugReports": "https://github.com/s-u/uuid/issues",
+        "NeedsCompilation": "yes",
+        "Packaged": "2024-07-29 03:16:54 UTC; rforge",
+        "Repository": "CRAN",
+        "Date/Publication": "2024-07-29 07:09:22 UTC",
+        "Built": "R 4.4.1; x86_64-w64-mingw32; 2024-08-15 15:29:00 UTC; windows",
+        "Archs": "x64"
+      }
+    },
     "vctrs": {
       "Source": "CRAN",
       "Repository": "https://cran.rstudio.com",
@@ -3668,7 +3717,7 @@
   },
   "files": {
     "app.R": {
-      "checksum": "48417aa83311d51feca7dd88ba3a04e9"
+      "checksum": "f7722a37ad89b45a591ee63a45a6cf8a"
     },
     "BASE.xlsx": {
       "checksum": "b32da05936c363525e843f03b3f6dc9c"
@@ -3683,7 +3732,7 @@
       "checksum": "87fc52c501ba0cbaaeaa97f2766cf5ae"
     },
     "packages.R": {
-      "checksum": "37d9ad4c76daf293f52c20c99ab7897e"
+      "checksum": "de268fd5af7b5ba99f9b584ed36649d5"
     },
     "PROYECCIONES_POBmulti.xlsx": {
       "checksum": "7eed513ab4c16632e95482cd9c6b2941"
