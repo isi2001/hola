@@ -1,7 +1,7 @@
 source("packages.R")
 source("CREACIONBASE.R")
 source("tablas.R")
-library(shinyalert)
+
 
 
 
@@ -179,10 +179,9 @@ if (dir.exists(extract_dir)) {
 
 # ui ----------------------------------------------------------------------
 
-
+Departamento de Estadísticas y Gestión Institucional
 
 ui <- navbarPage(
-  useShinyalert(), 
   title = div(
     style = "display: flex; align-items: center; gap: 10px; color: #FFFFFF",
     img(src="static/mop1.jpeg", style="height: 70px; width: auto;"),
@@ -235,6 +234,8 @@ ui <- navbarPage(
       }
     "))
   ),
+  
+  useShinyalert(), 
   tabPanel(title = tags$span("Información Nacional", style = "font-size: 16px;"),
            fluidPage(
              actionButton("mi_boton", label = "Información importante"),  
@@ -366,7 +367,7 @@ ui <- navbarPage(
                             ),
                             
                             card(
-                              card_header(span("Inversión por categoría del proyecto"),
+                              card_header(span("Inversión por categoría del proyecto (arrastre o nuevo)"),
                                           actionButton(
                                             "info_regCatNac", 
                                             "", 
@@ -524,19 +525,17 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
   
+  region_seleccionada <- reactiveVal(NULL)
+  
   shinyalert(
     title = "Nómina de Respaldo de Ley de Presupuestos MOP 2025",
     text = "Unidad de Gestión del Conocimiento y Tecnología",
-    type = "",
+    type = "info",
     closeOnEsc = FALSE,
     closeOnClickOutside = FALSE,
     showConfirmButton = TRUE,
-    confirmButtonText = "Cerrar",
-    imageUrl = "static/mop1.jpeg"
+    confirmButtonText = "Cerrar"
   )
-  region_seleccionada <- reactiveVal(NULL)
-  
-
  
   output$mapa <- renderLeaflet({
     leaflet(chile_regiones) %>%
