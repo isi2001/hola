@@ -179,7 +179,7 @@ if (dir.exists(extract_dir)) {
 
 # ui ----------------------------------------------------------------------
 
-Departamento de Estadísticas y Gestión Institucional
+
 
 ui <- navbarPage(
   title = div(
@@ -1139,9 +1139,9 @@ server <- function(input, output, session) {
     
     if (region_seleccionada() == "METROPOLITANA") {
       tab_resumen <- tab_resumen_RM %>%
-        mutate(Inversión = case_when(NombreComuna == "CALERA DE TANGO" ~ 0,
+        mutate(Monto2025 = case_when(NombreComuna == "CALERA DE TANGO" ~ 0,
                                      NombreComuna == "PIRQUE" ~ 0,
-                                     TRUE ~ Inversión)) |> 
+                                     TRUE ~ Monto2025)) |> 
         select(-c(`Código`))|> 
         mutate(
           `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
@@ -1171,8 +1171,8 @@ server <- function(input, output, session) {
         ) 
     } else if (region_seleccionada() == "BIOBÍO") {
       tab_resumen <- tab_resumen_BIOBIO |> 
-        mutate(Inversión = case_when(NombreComuna  == "SAN ROSENDO" ~ 0,
-                                     TRUE ~ Inversión)) |> 
+        mutate(Monto2025 = case_when(NombreComuna  == "SAN ROSENDO" ~ 0,
+                                     TRUE ~ Monto2025)) |> 
         select(-c(`Código`))|> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
