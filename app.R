@@ -1130,6 +1130,7 @@ server <- function(input, output, session) {
     
     if (region_seleccionada() == "METROPOLITANA") {
       tab_resumen <- tab_resumen_RM %>%
+        select(-c(`Código`))|> 
         mutate(
           `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
           `Población 2025` = scales::comma(`Población 2025`, big.mark = ".", decimal.mark = ","),
@@ -1158,6 +1159,7 @@ server <- function(input, output, session) {
         )
     } else if (region_seleccionada() == "BIOBÍO") {
       tab_resumen <- tab_resumen_BIOBIO  |> 
+        select(-c(`Código`))|> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
           `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
@@ -1186,6 +1188,7 @@ server <- function(input, output, session) {
       
     } else {
       tab_resumen <- tab_resumen  |> 
+        select(-c(`Código`))|> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
           `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
@@ -1230,7 +1233,9 @@ server <- function(input, output, session) {
                                         NombreComuna == "PUQUELDON" ~ "PUQUELDÓN",
                                         NombreComuna == "QUEILEN" ~ "QUEILÉN",
                                         NombreComuna == "QUELLON" ~ "QUELLÓN",
-                                        NombreComuna == "RIO NEGRO" ~ "RÍO NEGRO",NombreComuna == "AYSEN" ~ "AYSÉN",
+                                        NombreComuna == "RIO NEGRO" ~ "RÍO NEGRO",
+                                        NombreComuna == "AYSEN" ~ "AYSÉN",
+                                        NombreComuna == "COCHAMO" ~ "COCHAMÓ",
                                         NombreComuna == "RIO IBAÑEZ" ~ "RÍO IBAÑEZ",
                                         NombreComuna == "ANTARTICA" ~ "ANTÁRTICA",
                                         NombreComuna == "RIO VERDE" ~ "RÍO VERDE", TRUE ~ NombreComuna
