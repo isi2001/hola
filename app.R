@@ -1,7 +1,7 @@
 source("packages.R")
 source("CREACIONBASE.R")
 source("tablas.R")
-
+library(shinyalert)
 
 
 
@@ -182,6 +182,7 @@ if (dir.exists(extract_dir)) {
 
 
 ui <- navbarPage(
+  useShinyalert(), 
   title = div(
     style = "display: flex; align-items: center; gap: 10px; color: #FFFFFF",
     img(src="static/mop1.jpeg", style="height: 70px; width: auto;"),
@@ -234,8 +235,6 @@ ui <- navbarPage(
       }
     "))
   ),
-  
-  
   tabPanel(title = tags$span("Información Nacional", style = "font-size: 16px;"),
            fluidPage(
              actionButton("mi_boton", label = "Información importante"),  
@@ -367,7 +366,7 @@ ui <- navbarPage(
                             ),
                             
                             card(
-                              card_header(span("Inversión por categoría del proyecto (arrastre o nuevo)"),
+                              card_header(span("Inversión por categoría del proyecto"),
                                           actionButton(
                                             "info_regCatNac", 
                                             "", 
@@ -527,7 +526,17 @@ server <- function(input, output, session) {
   
   region_seleccionada <- reactiveVal(NULL)
   
-  
+  shinyalert(
+    title = "Nómina de Respaldo de Ley de Presupuestos MOP 2025",
+    text = "Unidad de Gestión del Conocimiento y Tecnología",
+    type = "",
+    closeOnEsc = FALSE,
+    closeOnClickOutside = FALSE,
+    showConfirmButton = TRUE,
+    confirmButtonText = "Cerrar",
+    imageUrl = "static/mop1.jpeg"
+  )
+ 
   output$mapa <- renderLeaflet({
     leaflet(chile_regiones) %>%
       addProviderTiles("CartoDB.Positron") %>% 
@@ -1130,6 +1139,9 @@ server <- function(input, output, session) {
     
     if (region_seleccionada() == "METROPOLITANA") {
       tab_resumen <- tab_resumen_RM %>%
+        mutate(Inversión = case_when(NombreComuna == "CALERA DE TANGO" ~ 0,
+                                     NombreComuna == "PIRQUE" ~ 0,
+                                     TRUE ~ Inversión)) |> 
         select(-c(`Código`))|> 
         mutate(
           `Población 2024` = scales::comma(`Población 2024`, big.mark = ".", decimal.mark = ","),
@@ -1156,12 +1168,11 @@ server <- function(input, output, session) {
           `Población 2025 (*)` = `Población 2025`,
           `Comuna` = `NombreComuna`,
           `Pobreza multidimensional (**)` = `Pobreza Multidimensional`,
-        ) |> 
-        mutate(Inversión = case_when(NombreComuna == "CALERA DE TANGO" ~ 0,
-                                     NombreComuna == "PIRQUE" ~ 0,
-                                     TRUE ~ Inversión))
+        ) 
     } else if (region_seleccionada() == "BIOBÍO") {
-      tab_resumen <- tab_resumen_BIOBIO  |> 
+      tab_resumen <- tab_resumen_BIOBIO |> 
+        mutate(Inversión = case_when(NombreComuna  == "SAN ROSENDO" ~ 0,
+                                     TRUE ~ Inversión)) |> 
         select(-c(`Código`))|> 
         mutate(
           Monto2025 = if_else(NombreComuna == "PICA", NA_real_, Monto2025),
@@ -1187,9 +1198,7 @@ server <- function(input, output, session) {
           Comuna = NombreComuna,
           `Pobreza multidimensional (**)` = `Pobreza Multidimensional`,
           `Crec/Decrec relativo de población 2024 al 2025 (%)` = `Crec/Decrec relativo de población 2024 al 2025`
-        ) |> 
-        mutate(Inversión = case_when(NombreComuna  == "SAN ROSENDO" ~ 0,
-                                     TRUE ~ Inversión))
+        ) 
       
     } else {
       tab_resumen <- tab_resumen  |> 
