@@ -234,8 +234,7 @@ ui <- navbarPage(
       }
     "))
   ),
-  
-  useShinyalert(), 
+
   tabPanel(title = tags$span("Información Nacional", style = "font-size: 16px;"),
            fluidPage(
              actionButton("mi_boton", label = "Información importante"),  
