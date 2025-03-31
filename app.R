@@ -1,7 +1,7 @@
 source("packages.R")
 source("CREACIONBASE.R")
 source("tablas.R")
-
+library(shinyalert)
 
 
 
@@ -182,13 +182,9 @@ if (dir.exists(extract_dir)) {
 
 
 ui <- navbarPage(
-  tags$head(
-    tags$script(HTML('
-      Shiny.addCustomMessageHandler("showWelcome", function(message) {
-        alert(message);
-      });
-    '))
-  ),
+
+
+  
   
   title = div(
     style = "display: flex; align-items: center; gap: 10px; color: #FFFFFF",
@@ -205,6 +201,10 @@ ui <- navbarPage(
     success = "#FFFFFF",
     base_font = font_google("Roboto")
   ),
+  
+  
+  
+  useShinyalert(),
   
   tags$head(
     tags$style(HTML("
@@ -530,7 +530,9 @@ ui <- navbarPage(
 
 
 server <- function(input, output, session) {
-  session$sendCustomMessage("showWelcome", "¡Bienvenida al Dashboard!")
+ 
+  shinyalert("Welcome", "Welcome to the ___ Dashboard!", type = "info")
+  
   region_seleccionada <- reactiveVal(NULL)
   
   output$mapa <- renderLeaflet({
@@ -1601,4 +1603,5 @@ server <- function(input, output, session) {
 
 
 shinyApp(ui = ui, server = server)
+
 
