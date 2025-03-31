@@ -182,13 +182,19 @@ if (dir.exists(extract_dir)) {
 
 
 ui <- navbarPage(
+  tags$head(
+    tags$script(HTML('
+      Shiny.addCustomMessageHandler("showWelcome", function(message) {
+        alert(message);
+      });
+    '))
+  ),
   
   title = div(
     style = "display: flex; align-items: center; gap: 10px; color: #FFFFFF",
     img(src="static/mop1.jpeg", style="height: 70px; width: auto;"),
-    h4("Nómina de Respaldo de Ley de Presupuestos MOP 2025", style = "margin: 0; color: #FFFFFF"),
+    h4("Nómina de Respaldo de Ley de Presupuestos MOP 2025", style = "margin: 0; color: #FFFFFF")
   ),
-  
   theme = bs_theme(
     bootswatch = "flatly",
     version = 5,
@@ -367,7 +373,7 @@ ui <- navbarPage(
                             ),
                             
                             card(
-                              card_header(span("Inversión por categoría del proyecto (arrastre o nuevo)"),
+                              card_header(span("Inversión por categoría del proyecto"),
                                           actionButton(
                                             "info_regCatNac", 
                                             "", 
@@ -524,9 +530,7 @@ ui <- navbarPage(
 
 
 server <- function(input, output, session) {
-  
-  shinyalert("Welcome", "Welcome to the ___ Dashboard!", type = "info")
-  
+  session$sendCustomMessage("showWelcome", "¡Bienvenida al Dashboard!")
   region_seleccionada <- reactiveVal(NULL)
   
   output$mapa <- renderLeaflet({
